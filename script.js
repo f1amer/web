@@ -92,7 +92,6 @@ function openAI(){
   aiPanel.classList.add('open');
   if(!hasGreeted){
     hasGreeted = true;
-    // Must run directly inside the click event so browsers allow speech.
     speakText(assistantGreeting);
   }
   aiInput.focus();
@@ -168,7 +167,10 @@ function askPortfolioAssistant(question){
   if(!question.trim()) return;
   addMessage(question, 'user');
   const reply = getPortfolioAnswer(question);
-  setTimeout(() => addMessage(reply, 'bot', true), 180);
+  setTimeout(() => {
+    addMessage(reply, 'bot', true);
+    speakText(reply);
+  }, 180);
 }
 
 aiForm.addEventListener('submit', e => {
