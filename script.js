@@ -40,7 +40,7 @@ const aiForm = document.getElementById('aiForm');
 const aiInput = document.getElementById('aiInput');
 const aiMessages = document.getElementById('aiMessages');
 
-const assistantGreeting = "Hi, I'm Shishir's chat assistant. I can tell you about his cybersecurity skills, certifications, projects and experience. How can I help you today?";
+const assistantGreeting = "Hi, I'm Shishir's chat assistant. It's nice to meet you. You can chat with me normally, or ask me about Shishir's cybersecurity skills, certifications, projects and experience. How can I help you today?";
 let hasGreeted = false;
 let preferredVoice = null;
 
@@ -50,17 +50,8 @@ function loadPreferredVoice(){
   if(!voices.length) return;
 
   const preferredNames = [
-    'Samantha',
-    'Karen',
-    'Moira',
-    'Tessa',
-    'Victoria',
-    'Zira',
-    'Sonia',
-    'Aria',
-    'Jenny',
-    'Google UK English Female',
-    'Google US English'
+    'Samantha', 'Karen', 'Moira', 'Tessa', 'Victoria', 'Zira', 'Sonia', 'Aria', 'Jenny',
+    'Microsoft Ava', 'Microsoft Emma', 'Microsoft Jenny', 'Google UK English Female', 'Google US English'
   ];
 
   preferredVoice = voices.find(v => preferredNames.some(name => v.name.toLowerCase().includes(name.toLowerCase())))
@@ -82,8 +73,8 @@ function speakText(text){
   const utterance = new SpeechSynthesisUtterance(text);
   if(preferredVoice) utterance.voice = preferredVoice;
   utterance.lang = preferredVoice?.lang || 'en-AU';
-  utterance.rate = 0.94;
-  utterance.pitch = 1.06;
+  utterance.rate = 0.96;
+  utterance.pitch = 1.02;
   utterance.volume = 1;
   window.speechSynthesis.speak(utterance);
 }
@@ -108,7 +99,6 @@ closeAiBtn.addEventListener('click', closeAI);
 function addMessage(text, type, withVoice = false){
   const wrap = document.createElement('div');
   wrap.className = `message ${type}`;
-
   const textNode = document.createElement('div');
   textNode.textContent = text;
   wrap.appendChild(textNode);
@@ -144,12 +134,34 @@ const portfolioAnswers = {
   roles: "Shishir is targeting cybersecurity, junior SOC analyst, security operations, IT support, service desk and networking-oriented opportunities where he can build on his defensive-security training and technical background.",
   whyhire: "Shishir combines a strong computing foundation, hands-on cybersecurity labs, security-framework knowledge, technical teaching experience and clear communication. He would be particularly well suited to an entry-level or junior role where learning ability, troubleshooting and security awareness are important.",
   contact: "You can contact Shishir through the Email, LinkedIn or GitHub links in the Contact section of this portfolio.",
-  fallback: "I totally understand — you want to know more about Shishir. I'm currently limited to the information available in this portfolio, so I can't answer that properly yet. Please contact Shishir directly for more details, or ask him to expand my knowledge in a future update."
+  fallback: "I totally understand what you're asking. I'm Shishir's portfolio chat assistant, so my knowledge is intentionally limited. I can have a normal conversation and answer questions about Shishir, but for anything more detailed or outside my current knowledge, please contact Shishir directly. Maybe tell him to give me an upgrade next time!"
 };
 
 function getPortfolioAnswer(question){
-  const q = question.toLowerCase();
+  const q = question.toLowerCase().trim();
+  const clean = q.replace(/[^a-z0-9\s']/g, '').trim();
 
+  // Natural small talk
+  if(/^(hi|hello|hey|hiya|yo|good morning|good afternoon|good evening)$/.test(clean))
+    return "Hi! It's nice to meet you. I'm Shishir's chat assistant. How are you today?";
+  if(q.includes('how are you') || q.includes('how r u') || q.includes('howre you'))
+    return "I'm doing great, thank you for asking! I'm here and ready to help. How are you doing?";
+  if(q.includes('i am good') || q.includes("i'm good") || q.includes('im good') || q.includes('doing good') || q.includes('doing well'))
+    return "That's good to hear! If you'd like, we can chat for a bit, or I can tell you anything I know about Shishir and his cybersecurity background.";
+  if(q.includes('thank you') || q.includes('thanks') || q === 'thx')
+    return "You're very welcome! Happy to help. If there's anything else you'd like to know about Shishir, just ask me.";
+  if(q.includes('who are you') || q.includes('what are you'))
+    return "I'm Shishir's portfolio chat assistant. I'm here to welcome visitors, have a friendly conversation, and help you learn about his skills, education, projects and cybersecurity background.";
+  if(q.includes('nice to meet you'))
+    return "Nice to meet you too! I'm glad you stopped by Shishir's portfolio.";
+  if(q.includes('good night'))
+    return "Good night! Thanks for visiting Shishir's portfolio. Have a lovely night.";
+  if(/\b(bye|goodbye|see you|see ya)\b/.test(q))
+    return "Goodbye! Thanks for visiting Shishir's portfolio. Have a great day!";
+  if(q.includes('what can you do') || q.includes('what do you know'))
+    return "I can chat with you normally and tell you about Shishir's cybersecurity skills, RangeForce training, certifications, projects, education, target roles and contact details.";
+
+  // Portfolio knowledge
   if(q.includes('rangeforce') || q.includes('132') || q.includes('47 hour')) return portfolioAnswers.rangeforce;
   if(q.includes('certificate') || q.includes('certification') || q.includes('hackerrank') || q.includes('sql')) return portfolioAnswers.certifications;
   if(q.includes('project') || q.includes('lab') || q.includes('vulnerability') || q.includes('log4shell') || q.includes('heartbleed')) return portfolioAnswers.projects;
@@ -158,7 +170,7 @@ function getPortfolioAnswer(question){
   if(q.includes('why hire') || q.includes('suitable') || q.includes('good candidate') || q.includes('hire shishir')) return portfolioAnswers.whyhire;
   if(q.includes('contact') || q.includes('email') || q.includes('linkedin') || q.includes('github')) return portfolioAnswers.contact;
   if(q.includes('skill') || q.includes('cyber') || q.includes('security') || q.includes('soc') || q.includes('siem') || q.includes('wazuh') || q.includes('nmap')) return portfolioAnswers.skills;
-  if(q.includes('who') || q.includes('about') || q.includes('profile') || q.includes('shishir')) return portfolioAnswers.profile;
+  if(q.includes('who is shishir') || q.includes('about shishir') || q.includes('profile')) return portfolioAnswers.profile;
 
   return portfolioAnswers.fallback;
 }
@@ -170,7 +182,7 @@ function askPortfolioAssistant(question){
   setTimeout(() => {
     addMessage(reply, 'bot', true);
     speakText(reply);
-  }, 180);
+  }, 120);
 }
 
 aiForm.addEventListener('submit', e => {
