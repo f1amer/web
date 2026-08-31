@@ -90,11 +90,12 @@ function speakText(text){
 
 function openAI(){
   aiPanel.classList.add('open');
-  setTimeout(() => aiInput.focus(), 100);
   if(!hasGreeted){
     hasGreeted = true;
-    setTimeout(() => speakText(assistantGreeting), 250);
+    // Must run directly inside the click event so browsers allow speech.
+    speakText(assistantGreeting);
   }
+  aiInput.focus();
 }
 function closeAI(){
   aiPanel.classList.remove('open');
