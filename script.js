@@ -40,25 +40,70 @@ const aiForm = document.getElementById('aiForm');
 const aiInput = document.getElementById('aiInput');
 const aiMessages = document.getElementById('aiMessages');
 
+const assistantGreeting = "Hi, I'm Shishir's chat assistant. I can tell you about his cybersecurity skills, certifications, projects and experience. How can I help you today?";
+let hasGreeted = false;
+let preferredVoice = null;
+
+function loadPreferredVoice(){
+  if(!('speechSynthesis' in window)) return;
+  const voices = window.speechSynthesis.getVoices();
+  if(!voices.length) return;
+
+  const preferredNames = [
+    'Samantha',
+    'Karen',
+    'Moira',
+    'Tessa',
+    'Victoria',
+    'Zira',
+    'Sonia',
+    'Aria',
+    'Jenny',
+    'Google UK English Female',
+    'Google US English'
+  ];
+
+  preferredVoice = voices.find(v => preferredNames.some(name => v.name.toLowerCase().includes(name.toLowerCase())))
+    || voices.find(v => /^en-AU/i.test(v.lang))
+    || voices.find(v => /^en-GB/i.test(v.lang))
+    || voices.find(v => /^en-US/i.test(v.lang))
+    || voices[0];
+}
+
+if('speechSynthesis' in window){
+  loadPreferredVoice();
+  window.speechSynthesis.onvoiceschanged = loadPreferredVoice;
+}
+
+function speakText(text){
+  if(!('speechSynthesis' in window)) return;
+  loadPreferredVoice();
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  if(preferredVoice) utterance.voice = preferredVoice;
+  utterance.lang = preferredVoice?.lang || 'en-AU';
+  utterance.rate = 0.94;
+  utterance.pitch = 1.06;
+  utterance.volume = 1;
+  window.speechSynthesis.speak(utterance);
+}
+
 function openAI(){
   aiPanel.classList.add('open');
   setTimeout(() => aiInput.focus(), 100);
+  if(!hasGreeted){
+    hasGreeted = true;
+    setTimeout(() => speakText(assistantGreeting), 250);
+  }
 }
-function closeAI(){ aiPanel.classList.remove('open'); }
+function closeAI(){
+  aiPanel.classList.remove('open');
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+}
 
 aiFab.addEventListener('click', openAI);
 openAiBtn.addEventListener('click', openAI);
 closeAiBtn.addEventListener('click', closeAI);
-
-function speakText(text){
-  if(!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.rate = 0.98;
-  utterance.pitch = 1;
-  utterance.lang = 'en-AU';
-  window.speechSynthesis.speak(utterance);
-}
 
 function addMessage(text, type, withVoice = false){
   const wrap = document.createElement('div');
