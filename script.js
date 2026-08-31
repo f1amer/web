@@ -144,7 +144,8 @@ const portfolioAnswers = {
   education: "Shishir holds a BSc Honours in Computing from Leeds Beckett University with First-Class Honours. He also has postgraduate study in Information Technology with a Security Management focus in Australia.",
   roles: "Shishir is targeting cybersecurity, junior SOC analyst, security operations, IT support, service desk and networking-oriented opportunities where he can build on his defensive-security training and technical background.",
   whyhire: "Shishir combines a strong computing foundation, hands-on cybersecurity labs, security-framework knowledge, technical teaching experience and clear communication. He would be particularly well suited to an entry-level or junior role where learning ability, troubleshooting and security awareness are important.",
-  contact: "You can contact Shishir through the Email, LinkedIn or GitHub links in the Contact section of this portfolio."
+  contact: "You can contact Shishir through the Email, LinkedIn or GitHub links in the Contact section of this portfolio.",
+  fallback: "I totally understand — you want to know more about Shishir. I'm currently limited to the information available in this portfolio, so I can't answer that properly yet. Please contact Shishir directly for more details, or ask him to expand my knowledge in a future update."
 };
 
 function getPortfolioAnswer(question){
@@ -160,7 +161,7 @@ function getPortfolioAnswer(question){
   if(q.includes('skill') || q.includes('cyber') || q.includes('security') || q.includes('soc') || q.includes('siem') || q.includes('wazuh') || q.includes('nmap')) return portfolioAnswers.skills;
   if(q.includes('who') || q.includes('about') || q.includes('profile') || q.includes('shishir')) return portfolioAnswers.profile;
 
-  return "I can help with Shishir's cybersecurity profile, skills, RangeForce training, certifications, projects, education, target roles and contact details. Try asking 'What cybersecurity skills does Shishir have?' or 'Why hire Shishir?'";
+  return portfolioAnswers.fallback;
 }
 
 function askPortfolioAssistant(question){
