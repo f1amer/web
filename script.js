@@ -15,7 +15,7 @@ const closeAiBtn=document.getElementById('closeAiBtn');
 const aiForm=document.getElementById('aiForm');
 const aiInput=document.getElementById('aiInput');
 const aiMessages=document.getElementById('aiMessages');
-const assistantGreeting="Hi, I'm Shishir's chat assistant. It's lovely to meet you. You can chat with me normally, ask about Shishir, check the weather, do a calculation, or prepare an email to him. How are you today?";
+const assistantGreeting="Hi, I'm Shishir's chat assistant. It's lovely to meet you. You can chat with me normally, ask about Shishir, ask for a joke, get help with common computer problems, check the weather, do a calculation, or prepare an email to him. How are you today?";
 let hasGreeted=false,preferredVoice=null;
 
 function loadPreferredVoice(){
@@ -43,7 +43,7 @@ const A={
  roles:"Shishir is targeting cybersecurity, junior SOC analyst, security operations, IT support, service desk and networking-oriented opportunities.",
  whyhire:"Shishir combines a strong computing foundation, hands-on cybersecurity labs, security-framework knowledge, technical teaching experience and clear communication. He is well suited to junior roles where learning ability, troubleshooting and security awareness matter.",
  contact:"You can contact Shishir through Email, LinkedIn or GitHub. To prepare an email here, type: email Shishir: followed by your message.",
- fallback:"I get what you're asking. I'm mainly Shishir's portfolio assistant, so I don't know everything yet. I can still chat with you, tell you about Shishir, do basic calculations, check weather by city, and help prepare an email. For anything else, Shishir will be the best person to ask — maybe tell him I need another upgrade!"
+ fallback:"I get what you're asking. I'm mainly Shishir's portfolio assistant, so I don't know everything yet. I can still chat with you, tell jokes, tell you about Shishir, help with many common computer problems, do basic calculations, check weather by city, and help prepare an email. For anything else, Shishir will be the best person to ask."
 };
 
 function normalChat(q){const s=q.toLowerCase().trim();const clean=s.replace(/[^a-z0-9\s']/g,'').trim();
@@ -51,7 +51,7 @@ function normalChat(q){const s=q.toLowerCase().trim();const clean=s.replace(/[^a
  if(s.includes('how are you')||s.includes('how r u')||s.includes('howre you'))return"I'm doing well, thanks for asking. I'm here keeping Shishir's portfolio company and helping visitors. How are you?";
  if(/^(not good|bad|not great|terrible|awful|not well|could be better)$/.test(clean)||s.includes("i'm not good")||s.includes('im not good'))return"I'm sorry to hear that. I hope things get a little easier for you. If you want, we can keep things light and chat for a moment, or I can help you find what you need here.";
  if(s.includes("i'm tired")||s.includes('im tired')||s.includes('very tired'))return"That sounds exhausting. I hope you get a proper chance to rest soon. Want to keep this simple and just chat, or are you looking for something specific?";
- if(s.includes("i'm stressed")||s.includes('im stressed')||s.includes('stressed out'))return"That sounds like a lot to carry. I can keep things easy here — we can chat, or I can help with something simple like information from Shishir's portfolio.";
+ if(s.includes("i'm stressed")||s.includes('im stressed')||s.includes('stressed out'))return"That sounds like a lot to carry. I can keep things easy here — we can chat, or I can help with something simple.";
  if(s.includes("i'm sad")||s.includes('im sad')||s.includes('feeling sad'))return"I'm sorry you're having a rough moment. I can stay here and chat with you for a bit if you'd like.";
  if(s.includes('i am good')||s.includes("i'm good")||s.includes('im good')||s.includes('doing good')||s.includes('doing well')||s.includes("i'm fine")||s.includes('im fine'))return"Glad to hear it! What brings you to Shishir's portfolio today?";
  if(s.includes('what are you doing')||s.includes('what r u doing'))return"Just hanging out here, helping visitors learn about Shishir and answering whatever I can.";
@@ -60,10 +60,10 @@ function normalChat(q){const s=q.toLowerCase().trim();const clean=s.replace(/[^a
  if(s.includes('do you like shishir'))return"I may be his portfolio assistant, so I'm probably a little biased — but I can definitely say he has given me plenty to talk about!";
  if(s.includes('thank you')||s.includes('thanks')||s==='thx')return"You're very welcome! Happy to help.";
  if(s.includes('nice to meet you'))return"Nice to meet you too! I'm glad you stopped by.";
- if(s.includes('who are you')||s.includes('what are you'))return"I'm Shishir's portfolio chat assistant. I can chat normally, answer questions about his background, do basic calculations, check current weather and help prepare an email.";
+ if(s.includes('who are you')||s.includes('what are you'))return"I'm Shishir's portfolio chat assistant. I can chat normally, answer questions about his background, tell jokes, troubleshoot common computer problems, do basic calculations, check current weather and help prepare an email.";
  if(s.includes('good night'))return"Good night! Thanks for stopping by, and I hope you have a peaceful night.";
  if(/\b(bye|goodbye|see you|see ya)\b/.test(s))return"Goodbye! Thanks for visiting Shishir's portfolio. It was nice chatting with you. Have a great day, and feel free to come back anytime.";
- if(s.includes('what can you do')||s.includes('what do you know'))return"I can chat normally, tell you about Shishir's cybersecurity background, show his verified certifications, do basic calculations, check current weather by city, and help prepare an email.";
+ if(s.includes('what can you do')||s.includes('what do you know'))return"I can chat normally, tell jokes, tell you about Shishir's cybersecurity background, show his certifications, troubleshoot many common computer problems, do basic calculations, check current weather by city, and help prepare an email.";
  return null}
 
 function portfolioAnswer(q){const s=q.toLowerCase();if(s.includes('rangeforce')||s.includes('132')||s.includes('47 hour'))return A.rangeforce;if(s.includes('certificate')||s.includes('certification')||s.includes('hackerrank')||s.includes('sql'))return A.certifications;if(s.includes('project')||s.includes('lab')||s.includes('vulnerability')||s.includes('log4shell')||s.includes('heartbleed'))return A.projects;if(s.includes('education')||s.includes('degree')||s.includes('university')||s.includes('study'))return A.education;if(s.includes('role')||s.includes('job')||s.includes('looking for')||s.includes('target'))return A.roles;if(s.includes('why hire')||s.includes('suitable')||s.includes('good candidate')||s.includes('hire shishir'))return A.whyhire;if(s.includes('contact')||s.includes('email')||s.includes('linkedin')||s.includes('github'))return A.contact;if(s.includes('skill')||s.includes('cyber')||s.includes('security')||s.includes('soc')||s.includes('siem')||s.includes('wazuh')||s.includes('nmap'))return A.skills;if(s.includes('who is shishir')||s.includes('about shishir')||s.includes('profile'))return A.profile;return A.fallback}
@@ -73,10 +73,25 @@ function weatherDescription(c){if(c===0)return'clear skies';if([1,2,3].includes(
 async function getWeatherAnswer(question){const lower=question.toLowerCase();if(!lower.includes('weather')&&!lower.includes('temperature'))return null;let city='';const m=question.match(/(?:weather|temperature)(?:\s+(?:today|now|right now))?\s+(?:in|at|for)\s+([a-zA-Z .'-]+)/i);if(m)city=m[1].trim();if(!city){const m2=question.match(/(?:weather|temperature)\s+([a-zA-Z .'-]{2,})/i);if(m2)city=m2[1].replace(/today|now|right now/gi,'').trim()}if(!city)return"Sure — tell me the city, for example: weather in Adelaide.";try{const g=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`);const gd=await g.json();const p=gd.results?.[0];if(!p)return`I couldn't find ${city}. Try the city name again.`;const w=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${p.latitude}&longitude=${p.longitude}&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m&timezone=auto`);const d=await w.json(),c=d.current;return`Right now in ${p.name}${p.country?', '+p.country:''}, it's ${Math.round(c.temperature_2m)} degrees Celsius with ${weatherDescription(c.weather_code)}. It feels like ${Math.round(c.apparent_temperature)} degrees, with wind around ${Math.round(c.wind_speed_10m)} kilometres per hour.`}catch{return"I couldn't get the live weather just now. Please try again in a moment."}}
 function handleSecureEmail(question){const m=question.match(/^(?:email shishir|send(?: an)? email(?: to shishir)?|message shishir)\s*:\s*(.+)$/i);if(!m)return false;const msg=m[1].trim().replace(/[\u0000-\u001F\u007F]/g,' ').replace(/\s{3,}/g,' ').slice(0,1500);const reply="I've prepared the message securely. I don't send mail silently or store your details. Click the button below and your own email app will open with the message ready to send.";addMessage(reply,'bot',true);speakText(reply);const mailto=`mailto:shishirbhattarai033@gmail.com?subject=${encodeURIComponent('Portfolio enquiry for Shishir Bhattarai')}&body=${encodeURIComponent(msg)}`;addActionButton('✉️ Open secure email',()=>location.href=mailto);return true}
 
-function handleResumeRequest(question){const s=question.toLowerCase();if(!/\b(resume|cv|curriculum vitae)\b/.test(s))return false;const reply="Shishir's resume is not available for download through this portfolio assistant. I can show you his verified portfolio information, certifications, education, skills and projects instead.";addMessage(reply,'bot',true);speakText(reply);return true}
+function handleResumeRequest(question){const s=question.toLowerCase();if(!/\b(resume|cv|curriculum vitae)\b/.test(s))return false;const reply="Shishir's resume is not available for download through this portfolio assistant. I can show you his portfolio information, certifications, education, skills and projects instead.";addMessage(reply,'bot',true);speakText(reply);return true}
 
-function handleCertificationRequest(question){const s=question.toLowerCase();if(!/(show|open|view|see|give me|display).*(certificate|certification)|(?:certificate|certification).*(show|open|view|see)/.test(s))return false;const reply="Sure. I can show you Shishir's verified certifications here. Choose one below.";addMessage(reply,'bot',true);speakText(reply);addActionButton('📄 View RangeForce Certificate',()=>window.open('assets/Shishir_Bhattarai_RangeForce_Certificate.pdf','_blank','noopener'));addActionButton('✅ Verify HackerRank SQL',()=>window.open('https://www.hackerrank.com/certificates/c1eb038ff2f8','_blank','noopener'));return true}
+function handleCertificationRequest(question){const s=question.toLowerCase();if(!/(show|open|view|see|give me|display).*(certificate|certification)|(?:certificate|certification).*(show|open|view|see)/.test(s))return false;const reply="Sure. I can show you Shishir's certification and credential links here. Choose one below.";addMessage(reply,'bot',true);speakText(reply);addActionButton('📄 View RangeForce Certificate',()=>window.open('assets/img/713175ae-f629-4195-a662-cfc9d42f8876.pdf','_blank','noopener'));addActionButton('✅ Verify HackerRank SQL',()=>window.open('https://www.hackerrank.com/certificates/c1eb038ff2f8','_blank','noopener'));return true}
 
-async function askPortfolioAssistant(question){if(!question.trim())return;addMessage(question,'user');if(handleResumeRequest(question))return;if(handleCertificationRequest(question))return;if(handleSecureEmail(question))return;const weather=await getWeatherAnswer(question);if(weather){addMessage(weather,'bot',true);speakText(weather);return}const calc=tryCalculation(question);if(calc){addMessage(calc,'bot',true);speakText(calc);return}const chat=normalChat(question);const reply=chat||portfolioAnswer(question);setTimeout(()=>{addMessage(reply,'bot',true);speakText(reply)},90)}
+async function askPortfolioAssistant(question){
+ if(!question.trim())return;
+ addMessage(question,'user');
+ if(handleResumeRequest(question))return;
+ if(handleCertificationRequest(question))return;
+ if(handleSecureEmail(question))return;
+ const weather=await getWeatherAnswer(question);
+ if(weather){addMessage(weather,'bot',true);speakText(weather);return}
+ const calc=tryCalculation(question);
+ if(calc){addMessage(calc,'bot',true);speakText(calc);return}
+ const knowledge=window.ShishirKnowledge?.answer?.(question);
+ if(knowledge){addMessage(knowledge,'bot',true);speakText(knowledge);return}
+ const chat=normalChat(question);
+ const reply=chat||portfolioAnswer(question);
+ addMessage(reply,'bot',true);speakText(reply);
+}
 aiForm?.addEventListener('submit',e=>{e.preventDefault();const q=aiInput?.value.trim();if(!q)return;aiInput.value='';askPortfolioAssistant(q)});
 document.querySelectorAll('.suggestions button').forEach(b=>b.addEventListener('click',()=>askPortfolioAssistant(b.dataset.question||'')));
