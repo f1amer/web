@@ -1,10 +1,17 @@
-// Handles short human-style replies that should never fall into the portfolio fallback.
+// Handles short human-style replies and simple local utility questions.
 (()=>{
   const base=window.ShishirKnowledge;
   if(!base)return;
   const previous=base.answer.bind(base);
   const pick=a=>a[Math.floor(Math.random()*a.length)];
   const clean=s=>s.toLowerCase().replace(/[^a-z0-9'\s]/g,' ').replace(/\s+/g,' ').trim();
+
+  function currentTimeReply(){
+    const now=new Date();
+    const time=now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+    const zone=Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return zone?`It's ${time} right now on your device (${zone.replace(/_/g,' ')}).`:`It's ${time} right now on your device.`;
+  }
 
   const natural=[
     [/^(good|good you|good and you|good how about you|i'm good you|im good you|i am good you|doing good you|doing well you)$/,["I'm good too, thanks for asking! By the way, what should I call you?","Doing well too, thank you! What's your name?","I'm doing great too. And before we keep chatting, what should I call you?"]],
@@ -24,6 +31,11 @@
 
   base.answer=function(q){
     const s=clean(q);
+    if(/^(what time is it|what's the time|whats the time|what is the time|time|time now|current time|tell me the time|can you tell me the time|what time is it now|what's the time now|whats the time now)$/.test(s)){
+      const reply=currentTimeReply();
+      if(base.smart?.state){base.smart.state.turns++;base.smart.state.lastUser=q;base.smart.state.lastReply=reply;}
+      return reply;
+    }
     for(const [re,replies] of natural){
       if(re.test(s)){
         const reply=pick(replies);
