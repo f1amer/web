@@ -1,0 +1,62 @@
+/* Shishir Cyber Arcade */
+.cyber-arcade-fab{
+  position:fixed;left:22px;bottom:22px;z-index:82;
+  border:1px solid rgba(53,231,255,.55);border-radius:999px;
+  background:rgba(3,18,24,.94);color:var(--cyan,#35e7ff);
+  padding:12px 15px;font:700 .72rem 'JetBrains Mono',monospace;
+  letter-spacing:.04em;cursor:pointer;box-shadow:0 0 30px rgba(53,231,255,.13);
+  transition:.2s transform,.2s border-color,.2s box-shadow;
+}
+.cyber-arcade-fab:hover{transform:translateY(-2px);border-color:var(--green,#41ff9a);box-shadow:0 0 34px rgba(65,255,154,.16)}
+.cyber-arcade-fab .arcade-live{display:inline-block;width:7px;height:7px;margin-right:7px;border-radius:50%;background:var(--green,#41ff9a);box-shadow:0 0 10px var(--green,#41ff9a);animation:arcadePulse 1.5s infinite}
+@keyframes arcadePulse{50%{opacity:.35;transform:scale(.75)}}
+
+.arcade-overlay{
+  position:fixed;inset:0;z-index:150;display:none;align-items:center;justify-content:center;
+  padding:18px;background:rgba(0,5,9,.84);backdrop-filter:blur(12px);
+}
+.arcade-overlay.open{display:flex;animation:arcadeFade .2s ease}
+@keyframes arcadeFade{from{opacity:0}to{opacity:1}}
+.arcade-shell{
+  width:min(980px,96vw);max-height:94vh;overflow:hidden;
+  border:1px solid rgba(65,255,154,.34);border-radius:16px;
+  background:linear-gradient(145deg,rgba(3,18,24,.99),rgba(1,8,12,.99));
+  box-shadow:0 35px 120px rgba(0,0,0,.72),0 0 45px rgba(53,231,255,.06);
+}
+.arcade-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;border-bottom:1px solid rgba(65,255,154,.16)}
+.arcade-title{display:flex;align-items:center;gap:10px;min-width:0}
+.arcade-title-badge{width:11px;height:11px;border:2px solid var(--green,#41ff9a);transform:rotate(45deg);box-shadow:0 0 12px rgba(65,255,154,.4)}
+.arcade-title strong{font:700 .82rem 'Orbitron',sans-serif;color:var(--green,#41ff9a);letter-spacing:.06em}
+.arcade-title small{display:block;color:#7c9a93;font:.62rem 'JetBrains Mono',monospace;margin-top:2px}
+.arcade-header-actions{display:flex;gap:7px}
+.arcade-icon-btn{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);color:#e8fff5;border-radius:8px;padding:7px 10px;cursor:pointer;font:600 .7rem 'JetBrains Mono',monospace}
+.arcade-icon-btn:hover{border-color:rgba(53,231,255,.5);color:var(--cyan,#35e7ff)}
+.arcade-content{max-height:calc(94vh - 58px);overflow:auto;padding:18px}
+.arcade-screen{display:none}.arcade-screen.active{display:block}
+
+.arcade-intro{text-align:center;padding:8px 8px 4px}
+.arcade-code{color:var(--cyan,#35e7ff);font:600 .66rem 'JetBrains Mono',monospace;letter-spacing:.12em}
+.arcade-intro h2{font-family:'Orbitron',sans-serif;font-size:clamp(1.55rem,4vw,2.6rem);margin:10px 0 8px}
+.arcade-intro p{max-width:650px;margin:0 auto;color:#8ea9a3;font-size:.9rem}
+.arcade-game-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px}
+.arcade-game-card{position:relative;overflow:hidden;text-align:left;border:1px solid rgba(65,255,154,.18);border-radius:13px;background:linear-gradient(145deg,rgba(12,35,39,.74),rgba(3,14,18,.8));padding:22px;color:#e8fff5;cursor:pointer;min-height:190px;transition:.2s}
+.arcade-game-card:after{content:"";position:absolute;width:110px;height:110px;right:-40px;top:-40px;border:1px solid rgba(53,231,255,.18);transform:rotate(45deg)}
+.arcade-game-card:hover{transform:translateY(-3px);border-color:rgba(65,255,154,.5);box-shadow:0 18px 50px rgba(0,0,0,.24)}
+.arcade-game-card .game-no{display:block;color:var(--green,#41ff9a);font:700 .63rem 'JetBrains Mono',monospace;letter-spacing:.12em;margin-bottom:22px}
+.arcade-game-card h3{font:700 1.05rem 'Orbitron',sans-serif;margin:0 0 9px}
+.arcade-game-card p{color:#8ea9a3;font-size:.82rem;margin:0;max-width:360px}.arcade-game-card .play-tag{display:inline-flex;margin-top:18px;border:1px solid rgba(53,231,255,.25);border-radius:999px;padding:5px 9px;color:var(--cyan,#35e7ff);font:600 .62rem 'JetBrains Mono',monospace}
+
+.arcade-game-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.arcade-game-name{display:flex;align-items:center;gap:9px}.arcade-game-name h3{font:700 .9rem 'Orbitron',sans-serif;margin:0;color:#fff}.arcade-game-name span{color:var(--green,#41ff9a);font:700 .65rem 'JetBrains Mono',monospace}
+.arcade-hud{display:flex;gap:8px;flex-wrap:wrap}.arcade-stat{border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.025);border-radius:8px;padding:6px 9px;font:600 .65rem 'JetBrains Mono',monospace;color:#9cb5ae}.arcade-stat b{color:#fff}
+.arcade-canvas-wrap{position:relative;border:1px solid rgba(53,231,255,.16);border-radius:13px;overflow:hidden;background:#02080c;touch-action:none}
+.arcade-canvas{width:100%;height:auto;display:block;max-height:62vh;touch-action:none}
+.arcade-help{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;margin-top:11px;color:#809b94;font:500 .68rem 'JetBrains Mono',monospace}
+.arcade-key{display:inline-block;min-width:24px;text-align:center;border:1px solid rgba(255,255,255,.12);border-bottom-width:3px;background:#0a171b;color:#dffef5;border-radius:5px;padding:2px 5px;margin:0 1px}
+.arcade-action-row{display:flex;gap:7px;flex-wrap:wrap}.arcade-action{border:1px solid rgba(65,255,154,.25);background:rgba(65,255,154,.04);color:var(--green,#41ff9a);border-radius:8px;padding:7px 10px;cursor:pointer;font:700 .65rem 'JetBrains Mono',monospace}.arcade-action.active,.arcade-action:hover{background:var(--green,#41ff9a);color:#011008}
+.mobile-fight-controls{display:none;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}.mobile-fight-controls button{min-height:44px;border:1px solid rgba(53,231,255,.2);border-radius:9px;background:#07161b;color:#e8fff5;font-weight:800;touch-action:none}
+
+.arcade-toast{position:absolute;left:50%;top:16px;transform:translateX(-50%) translateY(-8px);opacity:0;pointer-events:none;border:1px solid rgba(65,255,154,.3);background:rgba(2,15,17,.93);color:var(--green,#41ff9a);border-radius:999px;padding:7px 12px;font:700 .65rem 'JetBrains Mono',monospace;transition:.2s;white-space:nowrap}.arcade-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.arcade-pop-note{position:fixed;left:22px;bottom:78px;z-index:81;width:min(310px,calc(100vw - 44px));padding:13px 14px;border:1px solid rgba(53,231,255,.3);border-radius:10px;background:rgba(3,18,24,.97);box-shadow:0 18px 55px rgba(0,0,0,.45);display:none}.arcade-pop-note.show{display:block;animation:arcadeSlide .3s ease}@keyframes arcadeSlide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.arcade-pop-note strong{display:block;color:var(--cyan,#35e7ff);font:700 .72rem 'Orbitron',sans-serif;margin-bottom:4px}.arcade-pop-note span{color:#91aaa4;font-size:.74rem}.arcade-pop-note button{margin-top:9px;border:0;background:var(--green,#41ff9a);color:#001008;border-radius:7px;padding:7px 10px;font-weight:800;cursor:pointer}
+
+@media(max-width:700px){.cyber-arcade-fab{left:14px;bottom:14px;padding:11px 13px}.arcade-content{padding:12px}.arcade-game-grid{grid-template-columns:1fr}.arcade-shell{width:100%;max-height:96vh}.arcade-content{max-height:calc(96vh - 58px)}.mobile-fight-controls{display:grid}.arcade-help{font-size:.61rem}.arcade-pop-note{left:14px;bottom:70px;width:min(300px,calc(100vw - 28px))}}
