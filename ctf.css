@@ -1,0 +1,43 @@
+/* Hard-mode CTF extension for Shishir Cyber Arcade */
+.ctf-card{position:relative;overflow:hidden}
+.ctf-card::after{content:"HARD";position:absolute;top:12px;right:12px;border:1px solid rgba(255,92,115,.55);color:#ff7086;background:rgba(255,92,115,.08);padding:3px 7px;border-radius:999px;font:700 .62rem 'JetBrains Mono',monospace;letter-spacing:.08em}
+.ctf-shell{display:grid;grid-template-columns:280px 1fr;gap:14px;min-height:520px}
+.ctf-sidebar,.ctf-terminal-wrap{border:1px solid rgba(65,255,154,.2);background:rgba(1,10,13,.82);border-radius:10px}
+.ctf-sidebar{padding:16px;display:flex;flex-direction:column;gap:14px}
+.ctf-kicker{font:700 .65rem 'JetBrains Mono',monospace;color:#35e7ff;letter-spacing:.12em}
+.ctf-sidebar h4{margin:0;font:700 1rem Orbitron,sans-serif;color:#e8fff5}
+.ctf-sidebar p{margin:0;color:#91aaa5;font-size:.78rem;line-height:1.55}
+.ctf-warning{border:1px solid rgba(53,231,255,.2);background:rgba(53,231,255,.05);padding:9px 10px;border-radius:8px;color:#9ddfea;font:600 .67rem 'JetBrains Mono',monospace}
+.ctf-progress-list{display:grid;gap:8px}
+.ctf-objective{display:grid;grid-template-columns:20px 1fr;gap:8px;align-items:start;padding:8px;border:1px solid rgba(255,255,255,.06);border-radius:7px;background:rgba(255,255,255,.015);color:#69817a;font-size:.72rem}
+.ctf-objective b{font-family:'JetBrains Mono',monospace;color:#50665f}
+.ctf-objective.done{border-color:rgba(65,255,154,.28);color:#c7eee1;background:rgba(65,255,154,.045)}
+.ctf-objective.done b{color:#41ff9a}
+.ctf-scorebox{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}
+.ctf-scorebox div{border:1px solid rgba(255,255,255,.07);padding:8px;border-radius:7px;background:rgba(255,255,255,.018)}
+.ctf-scorebox span{display:block;color:#60766f;font:600 .58rem 'JetBrains Mono',monospace;letter-spacing:.07em}
+.ctf-scorebox strong{display:block;margin-top:3px;color:#e8fff5;font:700 .82rem 'JetBrains Mono',monospace}
+.ctf-terminal-wrap{display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.ctf-terminal-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid rgba(65,255,154,.15);background:rgba(65,255,154,.025)}
+.ctf-terminal-head span{font:600 .66rem 'JetBrains Mono',monospace;color:#41ff9a}
+.ctf-terminal-head em{font:600 .6rem 'JetBrains Mono',monospace;color:#ff7086;font-style:normal}
+.ctf-terminal{height:410px;overflow:auto;padding:14px;font:500 .76rem/1.58 'JetBrains Mono',monospace;color:#b8d5cc;white-space:pre-wrap;word-break:break-word;scrollbar-width:thin;scrollbar-color:#1e5144 transparent}
+.ctf-line{margin:0 0 6px}
+.ctf-line.cmd{color:#effff9}.ctf-line.ok{color:#41ff9a}.ctf-line.info{color:#35e7ff}.ctf-line.bad{color:#ff7086}.ctf-line.dim{color:#708982}.ctf-line.flag{color:#ffe66d;font-weight:800;text-shadow:0 0 16px rgba(255,230,109,.18)}
+.ctf-prompt{display:grid;grid-template-columns:auto 1fr auto;align-items:center;border-top:1px solid rgba(65,255,154,.15);background:#02090c}
+.ctf-prompt span{padding-left:12px;color:#41ff9a;font:700 .72rem 'JetBrains Mono',monospace}
+.ctf-input{min-width:0;background:transparent;border:0;outline:0;color:#e8fff5;padding:13px 10px;font:500 .76rem 'JetBrains Mono',monospace}
+.ctf-enter{height:100%;border:0;border-left:1px solid rgba(65,255,154,.15);background:rgba(65,255,154,.045);color:#41ff9a;padding:0 13px;font:700 .64rem 'JetBrains Mono',monospace;cursor:pointer}
+.ctf-toolbar{display:flex;gap:8px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid rgba(255,255,255,.045)}
+.ctf-tool{border:1px solid rgba(53,231,255,.18);background:transparent;color:#86cfdb;border-radius:7px;padding:7px 9px;font:600 .62rem 'JetBrains Mono',monospace;cursor:pointer}
+.ctf-tool:hover{border-color:rgba(53,231,255,.48);color:#d9fbff}
+.ctf-win{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,6,8,.93);backdrop-filter:blur(8px);z-index:5;padding:24px;text-align:center}
+.ctf-win.show{display:flex}
+.ctf-win-card{max-width:540px;border:1px solid rgba(65,255,154,.4);background:#04110f;border-radius:12px;padding:28px;box-shadow:0 0 70px rgba(65,255,154,.09)}
+.ctf-win-card .ctf-win-code{color:#41ff9a;font:700 .68rem 'JetBrains Mono',monospace;letter-spacing:.14em}
+.ctf-win-card h3{margin:10px 0 8px;font:800 1.65rem Orbitron,sans-serif;color:#fff}
+.ctf-win-card p{color:#9db7af;font-size:.82rem}
+.ctf-win-card strong{color:#ffe66d;font-family:'JetBrains Mono',monospace}
+.ctf-game-area{position:relative}
+@media(max-width:850px){.ctf-shell{grid-template-columns:1fr}.ctf-sidebar{order:2}.ctf-terminal{height:360px}.ctf-scorebox{margin-top:0}}
+@media(max-width:560px){.ctf-terminal{height:330px;font-size:.68rem}.ctf-prompt{grid-template-columns:auto 1fr}.ctf-enter{display:none}.ctf-sidebar{padding:12px}.ctf-shell{gap:10px}.ctf-scorebox{grid-template-columns:repeat(4,1fr)}.ctf-scorebox div{padding:6px}.ctf-scorebox strong{font-size:.7rem}.ctf-scorebox span{font-size:.5rem}}
